@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Login</title>
+  <title>Cadastre-se</title>
   <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
   <style>
     body {
@@ -19,6 +19,9 @@
       cursor: pointer; 
       outline: none; 
     }
+    .alert {
+      color: red;
+    }
   </style>
 </head>
 <body>
@@ -29,8 +32,8 @@
     <div class="col-md-4">
       <div class="card">
         <div class="card-body">
-          <h5 class="card-title text-center">Login</h5>
-          <form action="/login" method="POST">
+          <h5 class="card-title text-center">Cadastro</h5>
+          <form action="/cadastro" method="POST" id="cadastroForm">
             <div class="form-group">
               <label for="username">Usuário</label>
               <input type="text" class="form-control" id="username" name="username" placeholder="Nome do usuário" required>
@@ -39,16 +42,36 @@
               <label for="password">Senha</label>
               <input type="password" class="form-control" id="password" name="password" placeholder="Senha" required>
             </div>
-            <button type="submit" class="btn btn-primary btn-block">Entrar</button>
-          </form> 
-          <form action="/cadastro" method="GET">
-            <p>Não possui uma conta? <button type="submit" class="botao-cadastrar"> Cadastre-se aqui</button></p>
+            <div class="form-group" id="confirm-group">
+              <label for="password">Confirmar senha</label>
+              <input type="password" class="form-control" id="passwordconfirm" name="passwordconfirm" placeholder="Senha" required>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">Cadastrar</button>
+          </form>
+          <form action="/" method="GET">
+            <p>Já possui uma conta? <button type="submit" class="botao-cadastrar"> Entre aqui</button></p>
           </form>
         </div>
-      </div>  
+      </div>
     </div>
   </div>
 </div>
+
+<script>
+  document.getElementById("cadastroForm").addEventListener("submit", function(event){
+    const password = document.getElementById("password").value;
+    const passwordconfirm = document.getElementById("passwordconfirm").value;
+
+    
+      if (password !== passwordconfirm) {
+        let span = document.createElement("span");
+        span.classList.add("alert");
+        span.textContent = "As senhas não coincidem.";
+        document.getElementById("confirm-group").appendChild(span);
+        event.preventDefault()
+      } 
+  })
+</script> 
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>

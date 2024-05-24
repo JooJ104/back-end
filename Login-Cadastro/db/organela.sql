@@ -19,3 +19,8 @@ insert into user (idUser, username, password) values
 (3,'Ryan','ovelha');
 
 select * from user;
+
+alter table user modify idUser int not null auto_increment;
+
+alter table user;
+DELETE from user WHERE idUser=20;
